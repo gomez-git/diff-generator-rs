@@ -1,6 +1,4 @@
-mod pretty;
 mod stylish;
-mod to_json;
 
 use self::stylish::format_stylish;
 use crate::cli::Options;
@@ -12,11 +10,11 @@ pub enum Format {
 }
 
 pub struct Formatter {
-    formatter: fn(&Node) -> String,
+    formatter: fn(Node, usize) -> String,
 }
 
 impl Formatter {
-    fn new(formatter: fn(&Node) -> String) -> Self {
+    fn new(formatter: fn(Node, usize) -> String) -> Self {
         Self { formatter }
     }
 
@@ -26,7 +24,7 @@ impl Formatter {
         }
     }
 
-    pub fn format(&self, node: &Node) -> String {
-        (self.formatter)(node)
+    pub fn format(&self, node: Node) -> String {
+        (self.formatter)(node, 1)
     }
 }

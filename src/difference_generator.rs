@@ -13,7 +13,7 @@ pub fn generate_difference(options: Options) -> Result<String, Box<dyn Error>> {
     let ast = make_ast(objects);
 
     let difference: String = ast
-        .map(|node: Node| formatter.format(&node))
+        .map(|node: Node| formatter.format(node))
         .collect::<Vec<String>>()
         .join("\n");
 
